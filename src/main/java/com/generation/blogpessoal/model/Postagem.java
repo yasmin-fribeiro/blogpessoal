@@ -1,6 +1,7 @@
 package com.generation.blogpessoal.model;
 
 import java.time.LocalDateTime;
+
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -17,58 +18,61 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "tb_postagens")
 public class Postagem {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
-
-	@NotBlank(message = "O atributo titulo é obrigatorio!")
-	@Size(min = 5, max = 100, message = " O atributo titulo deve conter no minimo 05 e no maximo 100 caracteres")
+	
+	@NotBlank(message = "O atributo título é Obrigatório!") 
+	@Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
 	private String titulo;
-
-	@NotBlank(message = "O atributo text é obrigatório!")
+	
+	@NotBlank(message = "O atributo texto é Obrigatório!")
 	@Size(min = 10, max = 1000, message = "O atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres")
 	private String texto;
-
+	
 	@UpdateTimestamp
 	private LocalDateTime data;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
-
 	
-	public Long getId() {
-		return id;
-	}
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return this.id;
+    }
 
-	public String getTitulo() {
-		return titulo;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+    public String getTitulo() {
+        return this.titulo;
+    }
 
-	public String getTexto() {
-		return texto;
-	}
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-	public void setTexto(String texto) {
-		this.texto = texto;
-	}
+    public String getTexto() {
+        return this.texto;
+    }
 
-	public LocalDateTime getData() {
-		return data;
-	}
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
 
-	public void setData(LocalDateTime data) {
-		this.data = data;
-	}
+    public LocalDateTime getData() {
+        return this.data;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
 
 	public Tema getTema() {
 		return tema;
@@ -78,4 +82,12 @@ public class Postagem {
 		this.tema = tema;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+    
 }
